@@ -4,6 +4,9 @@ This PoliceJob is modified from the original one, it has better clothing and car
 
 [REQUIREMENTS]
 
+* To work
+  * ESX Base itself
+
 * Auto mode
 
   * esx_billing => https://github.com/FXServer-ESX/fxserver-esx_billing
