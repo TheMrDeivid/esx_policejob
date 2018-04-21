@@ -473,50 +473,37 @@ function OpenVehicleSpawnerMenu(station, partNum)
 
     local elements = {}
 
-	table.insert(elements, { label = 'Skoda', value = 'police'})
+	  table.insert(elements, { label = 'Skoda', value = 'police'})
     table.insert(elements, { label = 'Motorcycle', value = 'policeb'})
 
     if PlayerData.job.grade_name == 'officer' then -- PSP
       table.insert(elements, { label = 'Ford Explorer 2013', value = 'police3'})
       table.insert(elements, { label = 'Ford Utility', value = 'police4'})
-	  table.insert(elements, { label = 'Chevrolet Impala', value = 'police8'})
-	  table.insert(elements, { label = 'Prison Bus', value = 'pbus'})
-	  table.insert(elements, { label = 'Transport Van', value = 'policet'})
+
+	    table.insert(elements, { label = 'Prison Bus', value = 'pbus'})
+	    table.insert(elements, { label = 'Transport Van', value = 'policet'})
     end
 
     if PlayerData.job.grade_name == 'sergeant' then -- GNR
-	  table.insert(elements, { label = 'GNR 1', value = 'sheriff'})
-	  table.insert(elements, { label = 'GNR 2', value = 'sheriff2'})
-	  table.insert(elements, { label = 'GNR 3', value = 'sheriff3'})
-	  table.insert(elements, { label = 'LandRover', value = 'gnrdef'})
-	  table.insert(elements, { label = 'Volkswagen', value = 'sheriffevo'})
+	    table.insert(elements, { label = 'GNR 1', value = 'sheriff'})
+	    table.insert(elements, { label = 'GNR 2', value = 'sheriff2'})
     end
 
     if PlayerData.job.grade_name == 'lieutenant' then
       table.insert(elements, { label = 'Ford Explorer 2013', value = 'police3'})
       table.insert(elements, { label = 'Ford Utility', value = 'police4'})
-	  table.insert(elements, { label = 'Chevrolet Tahoe', value = 'police6'})
-	  table.insert(elements, { label = 'Chevrolet Impala', value = 'police8'})
       table.insert(elements, { label = 'Prison Bus', value = 'pbus'})
-	  table.insert(elements, { label = 'Transport Van', value = 'policet'})
+	    table.insert(elements, { label = 'Transport Van', value = 'policet'})
     end
 
     if PlayerData.job.grade_name == 'boss' then
-	  --table.insert(elements, { label = 'Skoda', value = 'police' })
       table.insert(elements, { label = 'Dodge Charger', value = 'police2'})
       table.insert(elements, { label = 'Ford Explorer 2013', value = 'police3'})
       table.insert(elements, { label = 'Ford Utility', value = 'police4'})
-      table.insert(elements, { label = 'Ford Explorer 2016', value = 'police5'})
-      table.insert(elements, { label = 'Chevrolet Tahoe', value = 'police6'})
-      table.insert(elements, { label = 'Crown Victoria', value = 'police7'})
-      table.insert(elements, { label = 'Chevrolet Impala', value = 'police8'})
-	  table.insert(elements, { label = 'GNR 1', value = 'sheriff'})
-	  table.insert(elements, { label = 'GNR 2', value = 'sheriff2'})
-	  table.insert(elements, { label = 'GNR 3', value = 'sheriff3'})
-	  table.insert(elements, { label = 'LandRover', value = 'gnrdef'})
-	  table.insert(elements, { label = 'Volkswagen', value = 'sheriffevo'})
+	    table.insert(elements, { label = 'GNR 1', value = 'sheriff'})
+	    table.insert(elements, { label = 'GNR 2', value = 'sheriff2'})
       table.insert(elements, { label = 'Prison Bus', value = 'pbus'})
-	  table.insert(elements, { label = 'Transport Van', value = 'policet'})
+	    table.insert(elements, { label = 'Transport Van', value = 'policet'})
     end
 
     ESX.UI.Menu.Open(
