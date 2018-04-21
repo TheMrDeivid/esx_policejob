@@ -51,21 +51,48 @@ function SetVehicleMaxMods(vehicle)
 end
 
 function cleanPlayer(playerPed)
-  --SetPedArmour(playerPed, 0)
+  SetPedArmour(playerPed, 0)
   ClearPedBloodDamage(playerPed)
   ResetPedVisibleDamage(playerPed)
   ClearPedLastWeaponDamage(playerPed)
-  --ResetPedMovementClipset(playerPed, 0)
+  ResetPedMovementClipset(playerPed, 0)
 end
+
+function setUniform(job, playerPed)
+  TriggerEvent('skinchanger:getSkin', function(skin)
+
+    if skin.sex == 0 then
+      if Config.Uniforms[job].male ~= nil then
+        TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms[job].male)
+      else
+        ESX.ShowNotification(_U('no_outfit'))
+      end
+      if job == 'bullet_wear' then
+        SetPedArmour(playerPed, 100)
+      end
+    else
+      if Config.Uniforms[job].female ~= nil then
+        TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms[job].female)
+      else
+        ESX.ShowNotification(_U('no_outfit'))
+      end
+      if job == 'bullet_wear' then
+        SetPedArmour(playerPed, 100)
+      end
+    end
+
+  end)
+end
+
 
 function OpenCloakroomMenu()
 
-  --local playerPed = GetPlayerPed(-1)
+  local playerPed = GetPlayerPed(-1)
 
   local elements = {
     { label = _U('citizen_wear'), value = 'citizen_wear' },
-	{ label = _U('police_wear'), value = 'police_wear'},
-    --{ label = _U('bullet_wear'), value = 'bullet_wear' }
+	  { label = _U('police_wear'), value = 'police_wear'},
+    { label = _U('bullet_wear'), value = 'bullet_wear' }
     --{ label = _U('gilet_wear'), value = 'gilet_wear' }
   }
 
@@ -89,7 +116,7 @@ function OpenCloakroomMenu()
     --table.insert(elements, {label = _U('police_wear'), value = 'commandant_wear'})
   --end
 
-  ESX.UI.Menu.CloseAll()
+  --ESX.UI.Menu.CloseAll()
 
   if Config.EnableNonFreemodePeds then
 	table.insert(elements, {label = _U('officer_wear'), value = 'officer_wear'})
@@ -98,7 +125,7 @@ function OpenCloakroomMenu()
     table.insert(elements, {label = _U('commandant_wear'), value = 'commandant_wear'})
   end
 
-  --ESX.UI.Menu.CloseAll()
+  ESX.UI.Menu.CloseAll()
 
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'cloakroom',
@@ -109,7 +136,7 @@ function OpenCloakroomMenu()
     },
     function(data, menu)
 
-      menu.close()
+      cleanPlayer(playerPed)
 
       --Taken from SuperCoolNinja
       if data.current.value == 'citizen_wear' then
@@ -275,7 +302,13 @@ function OpenCloakroomMenu()
 
         end)
       end
-     cleanPlayer(playerPed)
+      
+	   if
+        data.current.value == 'police_wear' or
+        data.current.value == 'bullet_wear'
+      then
+        setUniform(data.current.value, playerPed)
+      end
 
       CurrentAction     = 'menu_cloakroom'
       CurrentActionMsg  = _U('open_cloackroom')
@@ -283,15 +316,12 @@ function OpenCloakroomMenu()
 
     end,
     function(data, menu)
-
       menu.close()
-
       CurrentAction     = 'menu_cloakroom'
       CurrentActionMsg  = _U('open_cloackroom')
       CurrentActionData = {}
     end
   )
-
 end
 
 function OpenArmoryMenu(station)
